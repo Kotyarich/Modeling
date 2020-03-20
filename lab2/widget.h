@@ -1,0 +1,56 @@
+#ifndef WIDGET_H
+#define WIDGET_H
+
+#include <QWidget>
+#include <QGridLayout>
+#include <QtCharts/QChartView>
+#include "model.h"
+#include "methods.h"
+#include "chart.h"
+
+QT_BEGIN_NAMESPACE
+class QMouseEvent;
+class QResizeEvent;
+QT_END_NAMESPACE
+
+class Callout;
+
+namespace Ui {
+class Widget;
+}
+
+class Widget : public QWidget {
+    Q_OBJECT
+public:
+    explicit Widget(QWidget *parent = nullptr);
+    ~Widget();
+
+public slots:
+    void current_tooltip(QPointF point, bool state);
+    void resistance_tooltip(QPointF point, bool state);
+    void cap_voltage_tooltip(QPointF point, bool state);
+    void lamp_voltage_tooltip(QPointF point, bool state);
+    void temperature_tooltip(QPointF point, bool state);
+
+private slots:
+    void count();
+
+private:
+    Ui::Widget *ui;   
+
+    Callout *curr_tooltip;
+    Callout *resist_tooltip;
+    Callout *cap_volt_tooltip;
+    Callout *lamp_volt_tooltip;
+    Callout *temp_tooltip;
+
+    void init_current_chart();
+    void init_resistance_chart();
+    void init_cap_voltage_chart();
+    void init_lamp_voltage_chart();
+    void init_temperature_chart();
+
+    void chart_tooltip(Callout *&tooltip, Chart *chart, QPointF point, bool state);
+};
+
+#endif // WIDGET_H
