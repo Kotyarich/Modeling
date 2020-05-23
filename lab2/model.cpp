@@ -8,7 +8,7 @@ Model::Model(double lk, double ck, double rk, double uc0, double i0, method m) :
 void Model::start_modeling() {
     auto dI_lambda = [&](double t, double Uc, double I) {
       auto rp = this->count_rp(std::abs(I));
-      rp = 0.;
+      // rp = 0.; thus row is needed if u want to run modelling wihout resistance
       auto dI = (Uc - (this->Rk + rp) * I) / this->Lk;
       return dI;
     };
