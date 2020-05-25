@@ -6,16 +6,16 @@
 
 class Model {
 public:
-    Model(double F0);
+    Model();
 
     std::pair<std::vector<double>, std::vector<std::pair<double, dvector>>> count_T();
 
-    static const constexpr double h = 1e-2;
+    static const constexpr double h = 1e-1;
 private:
     static const constexpr double l = 10.;
     static const constexpr double R = 0.5;
     static const constexpr double T0 = 300;
-    static const constexpr double tau = 2;
+    static const constexpr double tau = 1;
 
     static const constexpr double a1 = 0.0134;
     static const constexpr double b1 = 1;
@@ -30,9 +30,9 @@ private:
     static const constexpr double _alpha_0 = 0.05;
     static const constexpr double _alpha_N = 0.01;
 
-    static const constexpr double eps = 1e-5;
+    static const constexpr double eps = 1e-3;
 
-    double _F0;
+    double F0(double time);
 
     border_conditions left;
     border_conditions right;
@@ -45,11 +45,8 @@ private:
     double p(double x_n) const;
     double f(double x_n) const;
 
-    double x_plus_half(double x_n) const;
-    double x_minus_half(double x_n) const;
-
     void sweep_params(dvector curr_T, dvector prev_T);
-    void left_border_cond(dvector curr_T, dvector prev_T);
+    void left_border_cond(dvector curr_T, dvector prev_T, double time);
     void right_border_cond(dvector curr_T, dvector prev_T);
 };
 

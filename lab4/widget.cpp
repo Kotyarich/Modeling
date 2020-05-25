@@ -15,13 +15,11 @@ Widget::~Widget() {
 }
 
 void Widget::count() {  
-    auto F0 = ui->F0_input->value();
-
-    Model model(F0);
+    Model model;
     auto result = model.count_T();
 
     auto curr_chart = static_cast<Chart*>(ui->chartView->chart());
-    for (auto i = 0ul; i < result.second.size(); i += 3) {
+    for (auto i = 0ul, step = 1ul; i < result.second.size(); step *= 2, i += step) {
         auto label = QString("time = ") + QString::number(result.second[i].first);
         curr_chart->add_values(result.first, result.second[i].second, label);
     }

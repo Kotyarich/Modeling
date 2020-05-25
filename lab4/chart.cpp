@@ -76,9 +76,9 @@ bool Chart::gestureEvent(QGestureEvent *event) {
 void Chart::createNewSeries() {
     auto series = new QLineSeries(this);
     QPen red(QColor(_color_red, 0, _color_blue));
-    _color_blue -= 10;
-    _color_red += 10;
-    red.setWidth(1);
+    _color_blue -= 20;
+    _color_red += 20;
+    red.setWidth(2);
     series->setPen(red);
     addSeries(series);
 
